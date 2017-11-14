@@ -62,6 +62,7 @@
                 return Object.assign({}, obj)
             },
             resetCurrent() {
+                //这里current是一个对象了！！
                 this.current = {}
             },
             getMaxId() {
@@ -71,27 +72,34 @@
                 })
                 return maxId;
             },
-            add() {
+            validate() {
                 let title = this.current.title;
-                if (!title) {
-                    console.error('plz enter a title');
-                    return;
+                if (!title || title.trim() === '') {
+                    swal('Please enter a title!')
+                    return false;
                 }
-                let copyList = this.copy(this.current);
-                copyList.id = this.getMaxId() + 1;
-                this.lists.push(copyList);
-                this.resetCurrent();
+                return true;
+            },
+            add() {
+                if (this.validate()) {
+                    let copyList = this.copy(this.current);
+                    copyList.id = this.getMaxId() + 1;
+                    this.lists.push(copyList);
+                    this.resetCurrent();
+                }
             },
             preUpdate(todo) {
                 this.current = this.copy(todo);
                 this.mode = 'update';
             },
             update() {
-                let that = this;
-                let i = this.findIndexById(that.current.id)
-                Object.assign(this.lists[i], this.copy(this.current))
-                this.resetCurrent();
-                this.mode = 'add'
+                if (this.validate()) {
+                    let that = this;
+                    let i = this.findIndexById(that.current.id)
+                    Object.assign(this.lists[i], this.copy(this.current))
+                    this.resetCurrent();
+                    this.mode = 'add'
+                }
             },
             remove(id) {
                 let index = this.findIndexById(id)

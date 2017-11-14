@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>item-list</title>
+    <title>Schedule</title>
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
             <input v-model="current.title" type="text" placeholder="搞事情..." autocomplete="off">
             <div class="detail" v-if="current.id">
                 <label>
-                    <textarea v-model="current.desc"></textarea>
+                    <textarea v-model="current.desc" placeholder="添加详情..."></textarea>
                     <input v-model="current.alertTime" type="datetime-local">
                 </label>
             </div>
@@ -42,7 +43,6 @@
         <div class="wrap">
             <span class="intro"> 已完成---</span>
             <div v-for="(todo,index) in lists" v-if="todo.completed">
-
                 <div class="item">
                     <button class="complete" @click="toggleComplete(todo.id)" v-if="mode!=='update'"></button>
                     {{todo.title}}
@@ -55,8 +55,7 @@
 
 </div>
 
-<script type="text/x-template" id="taskTpl">
-
+<template id="taskTpl">
     <div class="item">
         <button class="unComplete" @click="action('toggleComplete',todo.id)" v-if="mode!=='update'"></button>
         {{todo.title}}
@@ -67,11 +66,11 @@
             {{todo.desc||'暂无详情'}}
         </div>
     </div>
-    <div id="hello"></div>
-</script>
+</template>
 
 
 <script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="js/myStorage.js"></script>
 <script src="js/main.js"></script>
 </body>
