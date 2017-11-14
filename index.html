@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>item-list</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="main">
+    <div class="navbar"><h1>日程提醒应用</h1></div>
+    <div class="header">计划实现自律</div>
+    <audio src="sound/sound.mp3" id="sound"></audio>
+    <div class="task-list">
+        <div class="wrap ">
+            <input v-model="current.title" type="text" placeholder="搞事情..." autocomplete="off">
+            <div class="detail" v-if="current.id">
+                <label>
+                    <textarea v-model="current.desc"></textarea>
+                    <input v-model="current.alertTime" type="datetime-local">
+                </label>
+            </div>
+            <button class="add" @click="add" v-if="mode === 'add'">add</button>
+            <button class="add" @click="update" v-if="mode === 'update'">update</button>
+        </div>
+    </div>
+    <!--组件化-->
+    <div class="task-list">
+        <div class="wrap">
+            <span class="intro"> 未完成---</span>
+            <task v-for="(todo,index) in lists"
+                  :todo="todo"
+                  :mode="mode"
+                  v-if="!todo.completed"
+            >
+            </task>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="task-list">
+        <div class="wrap">
+            <span class="intro"> 已完成---</span>
+            <div v-for="(todo,index) in lists" v-if="todo.completed">
+
+                <div class="item">
+                    <button class="complete" @click="toggleComplete(todo.id)" v-if="mode!=='update'"></button>
+                    {{todo.title}}
+                    <button @click="remove(todo.id)">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/x-template" id="taskTpl">
+
+    <div class="item">
+        <button class="unComplete" @click="action('toggleComplete',todo.id)" v-if="mode!=='update'"></button>
+        {{todo.title}}
+        <button @click="action('remove',todo.id)" v-if="mode!=='update'">删除</button>
+        <button @click="action('preUpdate',todo)">更新</button>
+        <button @click="action('toggleDetail',todo.id)">详情</button>
+        <div v-if="todo.showDetail" class="desc">
+            {{todo.desc||'暂无详情'}}
+        </div>
+    </div>
+    <div id="hello"></div>
+</script>
+
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="js/myStorage.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  color: #444;
+  font-size: 20px;
+}
+
+.btn {
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 3px;
+  outline: none;
+  font-size: 80%;
+  background: #fff;
+  vertical-align: middle;
+}
+
+.ipt {
+  outline: none;
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
+}
+
+.comp {
+  visibility: visible;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+#main {
+  .navbar {
+    background: #db4c3f;
+    text-align: center;
+    padding: 10px 0;
+    color: #f7f3ea;
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+  }
+  .header {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 18px;
+    color: #555555;
+  }
+  #sound {
+    display: none;
+  }
+  .wrap {
+    margin: 0 auto;
+    max-width: 500px;
+    .intro{
+      color:#aaaaaa;
+      font-weight: lighter;
+    }
+    .add {
+      background-color: #db4c3f;
+      width: 100%;
+      height: 35px;
+      outline: none;
+      color: #f7f3ea;
+      font-size: large;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .item {
+      margin: 10px 0;
+      line-height: 1.2;
+      padding: 5px;
+      button {
+        visibility: hidden;
+      }
+      &:hover {
+        button {
+          visibility: visible;
+        }
+        background: rgba(0, 0, 0, .03);
+      }
+      .complete {
+        background: #50beff;
+        border: 1px solid #46a9e4;
+        .comp;
+        &:hover {
+          background: #3e9bd2;
+          border-color: #3587b7;
+        }
+
+      }
+      .unComplete {
+        .comp;
+        background: #ccc;
+        border-color: #bbb;
+      }
+      .desc{
+        text-indent:35px;
+        padding: 5px;
+        margin-top: 5px;
+        background: #ffff8c;
+      }
+
+    }
+    input {
+      .ipt;
+      .btn;
+      &:focus {
+        border: 1px solid #db4c3f;
+      }
+    }
+    textarea {
+      .ipt;
+      .btn;
+      &:focus {
+        border: 1px solid #db4c3f;
+      }
+    }
+    button {
+      .btn;
+    }
+  }
+}
